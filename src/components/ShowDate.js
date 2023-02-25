@@ -21,31 +21,38 @@ const value from field is any value that is being selected from the date picker.
                     return <ShowDate id={name} {...field} {...rest} selected={value} onChange={val=>setfieldValue(name , value)}/>
 */
 
-import { ErrorMessage, Field } from 'formik';
-import React from 'react'
-import ReactDatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import TextError from './TextError';
+import { ErrorMessage, Field } from "formik";
+import React from "react";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import TextError from "./TextError";
 
 const ShowDate = (props) => {
-  const {label , name , ...rest}=props;
-  
-    return (
+  const { label, name, ...rest } = props;
+
+  return (
     <div>
-        <label htmlFor={name}>{label}</label>
-        <Field name={name}>
-            {
-                ({form , field})=>{
-                        const {setFieldValue}=form;
-                        const {value}=field;
+      <label htmlFor={name}>{label}</label>
+      <Field name={name}>
+        {({ form, field }) => {
+          const { setFieldValue } = form;
+          const { value } = field;
 
-                    return <ReactDatePicker id={name} {...field} {...rest} selected={value} onChange={val=>setFieldValue(name , val)}/>
-                }
-            }
-        </Field>
-        <ErrorMessage name={name} component={TextError}/>
+          return (
+            <ReactDatePicker
+              id={name}
+              {...field}
+              {...rest}
+              selected={value}
+              onChange={(val) => setFieldValue(name, val)}
+              placeholderText="dd/mm/yyyy"
+            />
+          );
+        }}
+      </Field>
+      <ErrorMessage name={name} component={TextError} />
     </div>
-  )
-}
+  );
+};
 
-export default ShowDate
+export default ShowDate;
